@@ -1,0 +1,1626 @@
+Delivered-To: seodatascience@gmail.com
+Received: by 2002:a1c:4606:0:0:0:0:0 with SMTP id t6csp582662wma;
+        Fri, 14 Oct 2022 11:41:22 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM77thPZpFm0TpsoEfGFE1lHutmmN0B8lOFRDdoirm0Kew4lKhIKfJW/nXQk1h2hEOnRSHjK
+X-Received: by 2002:a17:90b:4a84:b0:20a:f497:6f5d with SMTP id lp4-20020a17090b4a8400b0020af4976f5dmr7104724pjb.213.1665772882292;
+        Fri, 14 Oct 2022 11:41:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1665772882; cv=none;
+        d=google.com; s=arc-20160816;
+        b=rgB4z96ZSOTxmx3Q6aLeu1ZBayvZltwcyMRVsCi6jfK2s6OSDfax7+3pkKL6zzKf+3
+         wG5rukTZm5zx7xZL36conVTiiAU9Lx1aytn9yNs1OH6bmL9vKY/0XTOCuzMjKlz+u3pY
+         ZhTE1dvSFi3N1+vkkEZj5QlYF7OxsQj1sBifSR/OO6mCiT56EdQkS1aYrYURWB+9R3Ry
+         gv94ccrN5+el8sl1vTInf9U39u3HMZA1qNE6XNnHVg2dUwbTshdIqJr977XH9lj3yiP1
+         88v+bdK3jEmsuaXSk3U0pqS0PRoKF0ELD1WMmrwA8WNZOpAP+sGlsklWoN4VRKaKfjfY
+         60vQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:list-unsubscribe-post:list-unsubscribe:precedence
+         :list-id:feedback-id:message-id:date:to:reply-to:from:subject
+         :dkim-signature:dkim-signature;
+        bh=oS9SW8YR3DXfTjbeT1hxSro72nCt7SZ31WscXK8vJko=;
+        b=qt5cTeadCed7AmAOMWug5sZzAcIVB5J169bsh9hjJg3JT/yyB4qXKhtOqVfj8+ao9Q
+         oGQCVcjP03hdgJfi/kOM1A5al1d/3jIURRef8XbFLlEhFJ+QvRlnXxSC/2GGDWTN2896
+         cmIhpbDdqD7lTIl6+qg61JGm97UrAVCkShM+fXdkr/yhRUHStbWsbtU1LHfr2uvcw2UI
+         Biu4d5Gmp8WXuletr5CFzzIIZDtywSTBtFCtRwUV3/jrirtNBnd3l0Ct2SfIkJZLy0+t
+         RuFNyWoM14ZJ+v6NotcV52RbEUUbluZ+CJvDmO6E96PzywDZezdYSfihg03CWoEpaAXq
+         sR2w==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.mcsv.net header.s=k1 header.b=JiYYyx4K;
+       dkim=pass header.i=@ansiblepilot.com header.s=k3 header.b=oDdrQHUG;
+       spf=pass (google.com: domain of bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net designates 148.105.10.12 as permitted sender) smtp.mailfrom=bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=ansiblepilot.com
+Return-Path: <bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net>
+Received: from mail12.sea172.mcdlv.net (mail12.sea172.mcdlv.net. [148.105.10.12])
+        by mx.google.com with ESMTPS id r17-20020a170903411100b00177e7f3aefcsi3264717pld.488.2022.10.14.11.41.21
+        for <seodatascience@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 14 Oct 2022 11:41:22 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net designates 148.105.10.12 as permitted sender) client-ip=148.105.10.12;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.mcsv.net header.s=k1 header.b=JiYYyx4K;
+       dkim=pass header.i=@ansiblepilot.com header.s=k3 header.b=oDdrQHUG;
+       spf=pass (google.com: domain of bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net designates 148.105.10.12 as permitted sender) smtp.mailfrom=bounce-mc.us5_164066346.9196351-b1c921b79b@mail12.sea172.mcdlv.net;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=ansiblepilot.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.mcsv.net;
+	s=k1; t=1665772880; x=1666075280;
+	bh=oS9SW8YR3DXfTjbeT1hxSro72nCt7SZ31WscXK8vJko=;
+	h=Subject:From:Reply-To:To:Date:Message-ID:X-MC-User:Feedback-ID:
+	 List-ID:List-Unsubscribe:List-Unsubscribe-Post:Content-Type:
+	 MIME-Version:CC:Date:Subject:From;
+	b=JiYYyx4KSc8znkU1OR+vSofm0W4ZTaBlQPGO7f9lySJfWSd8XFbAEnZARtm8+b36o
+	 WS5Ygsh2snDdvEn5WX7iL0sZ139CSaBxcstfyz9nV4ZgkT7snAENHRcPkVaiQnfjm/
+	 qjuHJkUhw/aXI8Gh6s2B3TkfbREViOT1tSWFEUSqvQ+o9qvbpWEzkLab90MmHyh4t5
+	 l3nQO/W5OzCfRmOzC6gZQzMatq7PO7rxAlE7jOLdjZ+hfHzmd4KPYH4F7A0kVuSDL6
+	 1B0UMSs4zA+sgO9XFnb7DxVk/BGDUQPzVTJGceJE/QpqzlJBGhfGMX2rB8pWKQgT2k
+	 2cy3Yk1Ena6Uw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ansiblepilot.com;
+	s=k3; t=1665772880; x=1666075280; i=info@ansiblepilot.com;
+	bh=oS9SW8YR3DXfTjbeT1hxSro72nCt7SZ31WscXK8vJko=;
+	h=Subject:From:Reply-To:To:Date:Message-ID:X-MC-User:Feedback-ID:
+	 List-ID:List-Unsubscribe:List-Unsubscribe-Post:Content-Type:
+	 MIME-Version:CC:Date:Subject:From;
+	b=oDdrQHUGBML7Aw6H6BBjapzf1B5iE5IV0Pga30Kodxtwoq8SBDVC4r14L8iKXQm2z
+	 wK22/9i7cxigMr1Wqcw/V9dtSWB2R8TQxy03SZS5rnleVchhO7sYSeX3V4TvFcGA3Z
+	 EpAkxaSE2QKuRfX0yEZkct9O8BDtXoUioxkKF/phJJ8h8jR6SAsyK5L7ZEgRUcBAua
+	 7DGha6MaWWgBTYhD2Sg/8zrCGzWK3W3t2xPuID6e9jG1An5OrkoGuEViPZFnQ/YFLZ
+	 EXy2NPxKQmJMhDe4LPP9lsFU/aK47o9W0syjQ2k3YqtGzEipe12NHydSg0WONv5ru4
+	 04aR60zxaw6Yg==
+Received: from localhost (localhost [127.0.0.1])
+	by mail12.sea172.mcdlv.net (Mailchimp) with ESMTP id 4MpwFr5jX1z6Cltd4
+	for <seodatascience@gmail.com>; Fri, 14 Oct 2022 18:41:20 +0000 (GMT)
+Subject: =?utf-8?Q?=F0=9F=96=A5=EF=B8=8F=20Install=20Ansible=20AWX=20Operator=20for=20Kubernetes=20=28K8s=29=20and=20OpenShift=20=28OCP=29=20=2D=20Ansible=20AWX?=
+From: =?utf-8?Q?Ansible=20Pilot?= <info@ansiblepilot.com>
+Reply-To: =?utf-8?Q?Ansible=20Pilot?= <info@ansiblepilot.com>
+To: =?utf-8?Q?Data=20Science?= <seodatascience@gmail.com>
+Date: Fri, 14 Oct 2022 18:41:19 +0000
+Message-ID: <c16b663d866ad250b525ddce3.b1c921b79b.20221014184113.218a2bd4ae.e77284e3@mail12.sea172.mcdlv.net>
+X-Mailer: Mailchimp Mailer - **CID218a2bd4aeb1c921b79b**
+X-Campaign: mailchimpc16b663d866ad250b525ddce3.218a2bd4ae
+X-campaignid: mailchimpc16b663d866ad250b525ddce3.218a2bd4ae
+X-Report-Abuse: Please report abuse for this campaign here: https://mailchimp.com/contact/abuse/?u=c16b663d866ad250b525ddce3&id=218a2bd4ae&e=b1c921b79b
+X-MC-User: c16b663d866ad250b525ddce3
+Feedback-ID: 164066346:164066346.9196351:us5:mc
+List-ID: c16b663d866ad250b525ddce3mc list <c16b663d866ad250b525ddce3.533270.list-id.mcsv.net>
+Precedence: bulk
+X-Accounttype: ff
+List-Unsubscribe: <https://ansiblepilot.us5.list-manage.com/unsubscribe?u=c16b663d866ad250b525ddce3&id=307ee3b1a0&e=b1c921b79b&c=218a2bd4ae>, <mailto:unsubscribe-mc.us5_c16b663d866ad250b525ddce3.218a2bd4ae-b1c921b79b@unsubscribe.mailchimpapp.net?subject=unsubscribe>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Content-Type: multipart/alternative; boundary="_----------=_MCPart_1926402736"
+MIME-Version: 1.0
+
+This is a multi-part message in MIME format
+
+--_----------=_MCPart_1926402736
+Content-Type: text/plain; charset="utf-8"; format="fixed"
+Content-Transfer-Encoding: quoted-printable
+
+How to deploy the latest Ansible AWX Operator in your local Red Hat OpenSh=
+ift Local=2C fully compatible with Kubernetes (K8s)
+
+
+** =F0=9F=92=BB Install Ansible AWX Operator for Kubernetes (K8s) and Open=
+Shift (OCP) - Ansible AWX
+------------------------------------------------------------
+Pre-Order Ansible For Vmware By Example Book NOW (https://ansiblepilot.us5=
+=2Elist-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3Dd4669f8736=
+&e=3Db1c921b79b)
+Hello Data=2C
+in the following the latest Ansible Pilot videos.
+
+ANSIBLE KEY DATES - from Ansible Official Newsletter (https://ansiblepilot=
+=2Eus5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D0ccbc7=
+b2bb&e=3Db1c921b79b)
+* 2022-10-17: Ansible Contributor Summit 2022.10 (https://ansiblepilot.us5=
+=2Elist-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3Df082bf88d1=
+&e=3Db1c921b79b)
+* 2022-10-17: Ansible-core 2.14 release candidate 1 (https://ansiblepilot.=
+us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D748bd6f=
+152&e=3Db1c921b79b)
+* 2022-10-18/19: AnsibleFest 2022 (https://ansiblepilot.us5.list-manage.co=
+m/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D9806492f4d&e=3Db1c921b79b)
+* 2022-10-18: DaWGs meeting (https://ansiblepilot.us5.list-manage.com/trac=
+k/click?u=3Dc16b663d866ad250b525ddce3&id=3Da7ee4ad1c8&e=3Db1c921b79b=
+) =2C 15:00 UTC
+* 2022-10-19: Community WG meeting (https://ansiblepilot.us5.list-manage.c=
+om/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D8a6fc04b65&e=3Db1c921b79b) =2C 18:00 UTC (propose topics here (https://ansiblepilot.us5.list=
+-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D3ddabdb721&e=3D=
+b1c921b79b) )
+* 2022-10-25: ETA for Ansible 6.6.0 release (https://ansiblepilot.us5.list=
+-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D0995f2ed57&e=3D=
+b1c921b79b)
+* 2022-10-26: Community WG meeting (https://ansiblepilot.us5.list-manage.c=
+om/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D8bfe990f52&e=3Db1c921b79b) =2C 18:00 UTC (topic: Decide what contingencies to activate for a=
+ny blockers that do not meet the deadline (https://ansiblepilot.us5.list-m=
+anage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D57dd64b260&e=3Db1c921b79b) )
+* 2022-10-27: Bullhorn #79 content deadline (https://ansiblepilot.us5.list=
+-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D72718d54ef&e=3D=
+b1c921b79b) =2C 18:00 UTC
+* 2022-11-07: ETA for Ansible-Core 2.13.6 and Ansible-Core 2.12.11 release=
+s (if those releases have updates)
+* 2022-11-07: Ansible-core 2.14 GA (https://ansiblepilot.us5.list-manage.c=
+om/track/click?u=3Dc16b663d866ad250b525ddce3&id=3Dbe818e8523&e=3Db1c921b79b)
+* 2022-11-07: Last day for collections to make backwards incompatible rele=
+ases that will be accepted into Ansible-7 (https://ansiblepilot.us5.list-m=
+anage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D1b5d8cdc9d&e=3Db1c921b79b)
+
+Luca
+PS: subscribe to the YouTube channel (https://ansiblepilot.us5.list-manage=
+=2Ecom/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D1644521c6d&e=3Db1c921b79b) to be up-to-date!
+https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b=
+525ddce3&id=3D9b4f2cb1e5&e=3Db1c921b79b
+Install Ansible AWX Operator for Kubernetes (K8s) and OpenShift (OCP) - An=
+sible AWX
+
+https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b=
+525ddce3&id=3D403b046965&e=3Db1c921b79b
+
+Run and Stop Ansible AWX in Docker containers - Ansible AWX
+
+Download Top 10 Ansible Best Practices (https://ansiblepilot.us5.list-mana=
+ge.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D1b346620eb&e=3Db1c921b79b)
+Learn Ansible in 200+ lessons in Udemy (https://ansiblepilot.us5.list-mana=
+ge.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D99ddfb4c03&e=3Db1c921b79b)
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+** Website (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b6=
+63d866ad250b525ddce3&id=3D481fdc6797&e=3Db1c921b79b)
+** Facebook (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b=
+663d866ad250b525ddce3&id=3D3b7f98002f&e=3Db1c921b79b)
+** Twitter (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b6=
+63d866ad250b525ddce3&id=3De9a30750a1&e=3Db1c921b79b)
+** Link (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d=
+866ad250b525ddce3&id=3D181e1f28cc&e=3Db1c921b79b)
+** Medium (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b66=
+3d866ad250b525ddce3&id=3Dd0368674ce&e=3Db1c921b79b)
+** Reddit (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b66=
+3d866ad250b525ddce3&id=3D533b129113&e=3Db1c921b79b)
+** YouTube (https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b6=
+63d866ad250b525ddce3&id=3D2319d49700&e=3Db1c921b79b)
+Copyright =C2=A9 2022 Ansible Pilot=2C All rights reserved.
+ You are receiving this email because you opted in via our website.
+
+Contact me:
+https://www.ansiblepilot.com/
+Want to change how you receive these emails?
+You can ** update your preferences (https://ansiblepilot.us5.list-manage.c=
+om/profile?u=3Dc16b663d866ad250b525ddce3&id=3D307ee3b1a0&e=3Db1c921b79b&c=3D=
+218a2bd4ae)
+or ** unsubscribe from this list (https://ansiblepilot.us5.list-manage.com=
+/unsubscribe?u=3Dc16b663d866ad250b525ddce3&id=3D307ee3b1a0&e=3Db1c921b79b&c=
+=3D218a2bd4ae)
+=2E
+ Email Marketing Powered by Mailchimp
+http://www.mailchimp.com/email-referral/?utm_source=3Dfreemium_newsletter&=
+utm_medium=3Demail&utm_campaign=3Dreferral_marketing&aid=3Dc16b663d866ad25=
+0b525ddce3&afl=3D1
+--_----------=_MCPart_1926402736
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-micros=
+oft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+    <head>
+        <!-- NAME: SELL PRODUCTS -->
+        <!--[if gte mso 15]>
+        <xml>
+            <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+        <![endif]-->
+        <meta charset=3D"UTF-8">
+        <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+        <meta name=3D"viewport" content=3D"width=3Ddevice-width=2C initial=
+-scale=3D1">
+        <title>=F0=9F=96=A5=EF=B8=8F Install Ansible AWX Operator for Kube=
+rnetes (K8s) and OpenShift (OCP) - Ansible AWX</title>
+
+    <style type=3D"text/css">
+=09=09p{
+=09=09=09margin:10px 0;
+=09=09=09padding:0;
+=09=09}
+=09=09table{
+=09=09=09border-collapse:collapse;
+=09=09}
+=09=09h1=2Ch2=2Ch3=2Ch4=2Ch5=2Ch6{
+=09=09=09display:block;
+=09=09=09margin:0;
+=09=09=09padding:0;
+=09=09}
+=09=09img=2Ca img{
+=09=09=09border:0;
+=09=09=09height:auto;
+=09=09=09outline:none;
+=09=09=09text-decoration:none;
+=09=09}
+=09=09body=2C#bodyTable=2C#bodyCell{
+=09=09=09height:100%;
+=09=09=09margin:0;
+=09=09=09padding:0;
+=09=09=09width:100%;
+=09=09}
+=09=09.mcnPreviewText{
+=09=09=09display:none !important;
+=09=09}
+=09=09#outlook a{
+=09=09=09padding:0;
+=09=09}
+=09=09img{
+=09=09=09-ms-interpolation-mode:bicubic;
+=09=09}
+=09=09table{
+=09=09=09mso-table-lspace:0pt;
+=09=09=09mso-table-rspace:0pt;
+=09=09}
+=09=09.ReadMsgBody{
+=09=09=09width:100%;
+=09=09}
+=09=09.ExternalClass{
+=09=09=09width:100%;
+=09=09}
+=09=09p=2Ca=2Cli=2Ctd=2Cblockquote{
+=09=09=09mso-line-height-rule:exactly;
+=09=09}
+=09=09a[href^=3Dtel]=2Ca[href^=3Dsms]{
+=09=09=09color:inherit;
+=09=09=09cursor:default;
+=09=09=09text-decoration:none;
+=09=09}
+=09=09p=2Ca=2Cli=2Ctd=2Cbody=2Ctable=2Cblockquote{
+=09=09=09-ms-text-size-adjust:100%;
+=09=09=09-webkit-text-size-adjust:100%;
+=09=09}
+=09=09.ExternalClass=2C.ExternalClass p=2C.ExternalClass td=2C.ExternalCla=
+ss div=2C.ExternalClass span=2C.ExternalClass font{
+=09=09=09line-height:100%;
+=09=09}
+=09=09a[x-apple-data-detectors]{
+=09=09=09color:inherit !important;
+=09=09=09text-decoration:none !important;
+=09=09=09font-size:inherit !important;
+=09=09=09font-family:inherit !important;
+=09=09=09font-weight:inherit !important;
+=09=09=09line-height:inherit !important;
+=09=09}
+=09=09.templateContainer{
+=09=09=09max-width:600px !important;
+=09=09}
+=09=09a.mcnButton{
+=09=09=09display:block;
+=09=09}
+=09=09.mcnImage=2C.mcnRetinaImage{
+=09=09=09vertical-align:bottom;
+=09=09}
+=09=09.mcnTextContent{
+=09=09=09word-break:break-word;
+=09=09}
+=09=09.mcnTextContent img{
+=09=09=09height:auto !important;
+=09=09}
+=09=09.mcnDividerBlock{
+=09=09=09table-layout:fixed !important;
+=09=09}
+=09=09h1{
+=09=09=09color:#222222;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:40px;
+=09=09=09font-style:normal;
+=09=09=09font-weight:bold;
+=09=09=09line-height:150%;
+=09=09=09letter-spacing:normal;
+=09=09=09text-align:center;
+=09=09}
+=09=09h2{
+=09=09=09color:#222222;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:34px;
+=09=09=09font-style:normal;
+=09=09=09font-weight:bold;
+=09=09=09line-height:150%;
+=09=09=09letter-spacing:normal;
+=09=09=09text-align:left;
+=09=09}
+=09=09h3{
+=09=09=09color:#444444;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:22px;
+=09=09=09font-style:normal;
+=09=09=09font-weight:bold;
+=09=09=09line-height:150%;
+=09=09=09letter-spacing:normal;
+=09=09=09text-align:left;
+=09=09}
+=09=09h4{
+=09=09=09color:#949494;
+=09=09=09font-family:Georgia;
+=09=09=09font-size:20px;
+=09=09=09font-style:italic;
+=09=09=09font-weight:normal;
+=09=09=09line-height:125%;
+=09=09=09letter-spacing:normal;
+=09=09=09text-align:left;
+=09=09}
+=09=09#templateHeader{
+=09=09=09background-color:#F7F7F7;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:45px;
+=09=09=09padding-bottom:45px;
+=09=09}
+=09=09.headerContainer{
+=09=09=09background-color:transparent;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:0;
+=09=09=09padding-bottom:0;
+=09=09}
+=09=09.headerContainer .mcnTextContent=2C.headerContainer .mcnTextContent=
+ p{
+=09=09=09color:#757575;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:16px;
+=09=09=09line-height:150%;
+=09=09=09text-align:left;
+=09=09}
+=09=09.headerContainer .mcnTextContent a=2C.headerContainer .mcnTextConten=
+t p a{
+=09=09=09color:#007C89;
+=09=09=09font-weight:normal;
+=09=09=09text-decoration:underline;
+=09=09}
+=09=09#templateBody{
+=09=09=09background-color:#FFFFFF;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:36px;
+=09=09=09padding-bottom:45px;
+=09=09}
+=09=09.bodyContainer{
+=09=09=09background-color:transparent;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:0;
+=09=09=09padding-bottom:0;
+=09=09}
+=09=09.bodyContainer .mcnTextContent=2C.bodyContainer .mcnTextContent p{
+=09=09=09color:#757575;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:16px;
+=09=09=09line-height:150%;
+=09=09=09text-align:left;
+=09=09}
+=09=09.bodyContainer .mcnTextContent a=2C.bodyContainer .mcnTextContent p=
+ a{
+=09=09=09color:#007C89;
+=09=09=09font-weight:normal;
+=09=09=09text-decoration:underline;
+=09=09}
+=09=09#templateFooter{
+=09=09=09background-color:#333333;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:45px;
+=09=09=09padding-bottom:63px;
+=09=09}
+=09=09.footerContainer{
+=09=09=09background-color:transparent;
+=09=09=09background-image:none;
+=09=09=09background-repeat:no-repeat;
+=09=09=09background-position:center;
+=09=09=09background-size:cover;
+=09=09=09border-top:0;
+=09=09=09border-bottom:0;
+=09=09=09padding-top:0;
+=09=09=09padding-bottom:0;
+=09=09}
+=09=09.footerContainer .mcnTextContent=2C.footerContainer .mcnTextContent=
+ p{
+=09=09=09color:#FFFFFF;
+=09=09=09font-family:Helvetica;
+=09=09=09font-size:12px;
+=09=09=09line-height:150%;
+=09=09=09text-align:center;
+=09=09}
+=09=09.footerContainer .mcnTextContent a=2C.footerContainer .mcnTextConten=
+t p a{
+=09=09=09color:#FFFFFF;
+=09=09=09font-weight:normal;
+=09=09=09text-decoration:underline;
+=09=09}
+=09@media only screen and (min-width:768px){
+=09=09.templateContainer{
+=09=09=09width:600px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09body=2Ctable=2Ctd=2Cp=2Ca=2Cli=2Cblockquote{
+=09=09=09-webkit-text-size-adjust:none !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09body{
+=09=09=09width:100% !important;
+=09=09=09min-width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnRetinaImage{
+=09=09=09max-width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImage{
+=09=09=09width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnCartContainer=2C.mcnCaptionTopContent=2C.mcnRecContentContainer=
+=2C.mcnCaptionBottomContent=2C.mcnTextContentContainer=2C.mcnBoxedTextCont=
+entContainer=2C.mcnImageGroupContentContainer=2C.mcnCaptionLeftTextContent=
+Container=2C.mcnCaptionRightTextContentContainer=2C.mcnCaptionLeftImageCon=
+tentContainer=2C.mcnCaptionRightImageContentContainer=2C.mcnImageCardLeftT=
+extContentContainer=2C.mcnImageCardRightTextContentContainer=2C.mcnImageCa=
+rdLeftImageContentContainer=2C.mcnImageCardRightImageContentContainer{
+=09=09=09max-width:100% !important;
+=09=09=09width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnBoxedTextContentContainer{
+=09=09=09min-width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageGroupContent{
+=09=09=09padding:9px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnCaptionLeftContentOuter .mcnTextContent=2C.mcnCaptionRightConten=
+tOuter .mcnTextContent{
+=09=09=09padding-top:9px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageCardTopImageContent=2C.mcnCaptionBottomContent:last-child .=
+mcnCaptionBottomImageContent=2C.mcnCaptionBlockInner .mcnCaptionTopContent=
+:last-child .mcnTextContent{
+=09=09=09padding-top:18px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageCardBottomImageContent{
+=09=09=09padding-bottom:9px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageGroupBlockInner{
+=09=09=09padding-top:0 !important;
+=09=09=09padding-bottom:0 !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageGroupBlockOuter{
+=09=09=09padding-top:9px !important;
+=09=09=09padding-bottom:9px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnTextContent=2C.mcnBoxedTextContentColumn{
+=09=09=09padding-right:18px !important;
+=09=09=09padding-left:18px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnImageCardLeftImageContent=2C.mcnImageCardRightImageContent{
+=09=09=09padding-right:18px !important;
+=09=09=09padding-bottom:0 !important;
+=09=09=09padding-left:18px !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcpreview-image-uploader{
+=09=09=09display:none !important;
+=09=09=09width:100% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09h1{
+=09=09=09font-size:30px !important;
+=09=09=09line-height:125% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09h2{
+=09=09=09font-size:26px !important;
+=09=09=09line-height:125% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09h3{
+=09=09=09font-size:20px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09h4{
+=09=09=09font-size:18px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.mcnBoxedTextContentContainer .mcnTextContent=2C.mcnBoxedTextContent=
+Container .mcnTextContent p{
+=09=09=09font-size:14px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.headerContainer .mcnTextContent=2C.headerContainer .mcnTextContent=
+ p{
+=09=09=09font-size:16px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.bodyContainer .mcnTextContent=2C.bodyContainer .mcnTextContent p{
+=09=09=09font-size:16px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}=09@media only screen and (max-width: 480px){
+=09=09.footerContainer .mcnTextContent=2C.footerContainer .mcnTextContent=
+ p{
+=09=09=09font-size:14px !important;
+=09=09=09line-height:150% !important;
+=09=09}
+
+}</style></head>
+    <body style=3D"height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-=
+size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+        <!--
+-->
+        <!--[if !gte mso 9]><!----><span class=3D"mcnPreviewText" style=
+=3D"display:none; font-size:0px; line-height:0px; max-height:0px; max-widt=
+h:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">How t=
+o deploy the latest Ansible AWX Operator in your local Red Hat OpenShift L=
+ocal=2C fully compatible with Kubernetes (K8s)</span><!--<![endif]-->
+        <!--
+-->
+        <center>
+            <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" height=3D"100%" width=3D"100%" id=3D"bodyTable" style=3D"border=
+-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-s=
+ize-adjust: 100%;-webkit-text-size-adjust: 100%;height: 100%;margin: 0;pad=
+ding: 0;width: 100%;">
+                <tr>
+                    <td align=3D"center" valign=3D"top" id=3D"bodyCell" st=
+yle=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-te=
+xt-size-adjust: 100%;height: 100%;margin: 0;padding: 0;width: 100%;">
+                        <!-- BEGIN TEMPLATE // -->
+                        <table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"border-collapse: collapse;mso-table-lspace:=
+ 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-ad=
+just: 100%;">
+                            <tr>
+                                <td align=3D"center" valign=3D"top" id=3D"=
+templateHeader" data-template-container=3D"" style=3D"background:#F7F7F7 n=
+one no-repeat center/cover;mso-line-height-rule: exactly;-ms-text-size-adj=
+ust: 100%;-webkit-text-size-adjust: 100%;background-color: #F7F7F7;backgro=
+und-image: none;background-repeat: no-repeat;background-position: center;b=
+ackground-size: cover;border-top: 0;border-bottom: 0;padding-top: 45px;pad=
+ding-bottom: 45px;">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align=3D"center" border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0" width=3D"600" style=3D"width:600px;">
+                                    <tr>
+                                    <td align=3D"center" valign=3D"top" wi=
+dth=3D"600" style=3D"width:600px;">
+                                    <![endif]-->
+                                    <table align=3D"center" border=3D"0" c=
+ellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"templateContain=
+er" style=3D"border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rsp=
+ace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;max-wid=
+th: 600px !important;">
+                                        <tr>
+                                            <td valign=3D"top" class=3D"he=
+aderContainer" style=3D"background:transparent none no-repeat center/cover=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;background-color: transparent;background-image: none;backgr=
+ound-repeat: no-repeat;background-position: center;background-size: cover;=
+border-top: 0;border-bottom: 0;padding-top: 0;padding-bottom: 0;"><table b=
+order=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"mc=
+nImageBlock" style=3D"min-width: 100%;border-collapse: collapse;mso-table-=
+lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;">
+    <tbody class=3D"mcnImageBlockOuter">
+            <tr>
+                <td valign=3D"top" style=3D"padding: 9px;mso-line-height-r=
+ule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" c=
+lass=3D"mcnImageBlockInner">
+                    <table align=3D"left" width=3D"100%" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" class=3D"mcnImageContentContainer" style=
+=3D"min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-ta=
+ble-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;=
+">
+                        <tbody><tr>
+                            <td class=3D"mcnImageContent" valign=3D"top" s=
+tyle=3D"padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom=
+: 0;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">
+
+
+                                        <img align=3D"center" alt=3D"" src=
+=3D"https://mcusercontent.com/c16b663d866ad250b525ddce3/images/707cfd73-6c=
+2f-b973-e2a9-f13cf57cd358.png" width=3D"34.92" style=3D"max-width: 194px;p=
+adding-bottom: 0;display: inline !important;vertical-align: bottom;border:=
+ 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode=
+: bicubic;" class=3D"mcnImage">
+
+
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnTextBlock" style=3D"min-width: 100%;border-collapse: coll=
+apse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100=
+%;-webkit-text-size-adjust: 100%;">
+    <tbody class=3D"mcnTextBlockOuter">
+        <tr>
+            <td valign=3D"top" class=3D"mcnTextBlockInner" style=3D"paddin=
+g-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webki=
+t-text-size-adjust: 100%;">
+              =09<!--[if mso]>
+=09=09=09=09<table align=3D"left" border=3D"0" cellspacing=3D"0" cellpaddi=
+ng=3D"0" width=3D"100%" style=3D"width:100%;">
+=09=09=09=09<tr>
+=09=09=09=09<![endif]-->
+=09=09=09
+=09=09=09=09<!--[if mso]>
+=09=09=09=09<td valign=3D"top" width=3D"600" style=3D"width:600px;">
+=09=09=09=09<![endif]-->
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" style=3D"max-width: 100%;min-width: 100%;border-collapse: col=
+lapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;" width=3D"100%" class=3D"mcnTextContent=
+Container">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"mcnTextContent" style=
+=3D"padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 1=
+8px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;word-break: break-word;color: #757575;font-family: Helve=
+tica;font-size: 16px;line-height: 150%;text-align: left;">
+
+                            <h1 style=3D"display: block;margin: 0;padding:=
+ 0;color: #222222;font-family: Helvetica;font-size: 40px;font-style: norma=
+l;font-weight: bold;line-height: 150%;letter-spacing: normal;text-align: c=
+enter;">=F0=9F=92=BB Install Ansible AWX Operator for Kubernetes (K8s) and=
+ OpenShift (OCP) - Ansible AWX</h1>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</td>
+=09=09=09=09<![endif]-->
+
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</tr>
+=09=09=09=09</table>
+=09=09=09=09<![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnButtonBlock" style=3D"min-width: 100%;border-collapse: co=
+llapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 1=
+00%;-webkit-text-size-adjust: 100%;">
+    <tbody class=3D"mcnButtonBlockOuter">
+        <tr>
+            <td style=3D"padding-top: 0;padding-right: 18px;padding-bottom=
+: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adju=
+st: 100%;-webkit-text-size-adjust: 100%;" valign=3D"top" align=3D"center"=
+ class=3D"mcnButtonBlockInner">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"mcnButtonContentContainer" style=3D"border-collapse: separate !impo=
+rtant;border-radius: 4px;background-color: #E0629A;mso-table-lspace: 0pt;m=
+so-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust:=
+ 100%;">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" class=
+=3D"mcnButtonContent" style=3D"font-family: Arial;font-size: 16px;padding:=
+ 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-tex=
+t-size-adjust: 100%;">
+                                <a class=3D"mcnButton " title=3D"Pre-Order=
+ Ansible For Vmware By Example Book NOW" href=3D"https://ansiblepilot.us5.=
+list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D21f33ae0ef&=
+e=3Db1c921b79b" target=3D"_blank" style=3D"font-weight: bold;letter-spaci=
+ng: normal;line-height: 100%;text-align: center;text-decoration: none;colo=
+r: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webki=
+t-text-size-adjust: 100%;display: block;">Pre-Order Ansible For Vmware By=
+ Example Book NOW</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align=3D"center" valign=3D"top" id=3D"=
+templateBody" data-template-container=3D"" style=3D"background:#FFFFFF non=
+e no-repeat center/cover;mso-line-height-rule: exactly;-ms-text-size-adjus=
+t: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;backgroun=
+d-image: none;background-repeat: no-repeat;background-position: center;bac=
+kground-size: cover;border-top: 0;border-bottom: 0;padding-top: 36px;paddi=
+ng-bottom: 45px;">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align=3D"center" border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0" width=3D"600" style=3D"width:600px;">
+                                    <tr>
+                                    <td align=3D"center" valign=3D"top" wi=
+dth=3D"600" style=3D"width:600px;">
+                                    <![endif]-->
+                                    <table align=3D"center" border=3D"0" c=
+ellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"templateContain=
+er" style=3D"border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rsp=
+ace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;max-wid=
+th: 600px !important;">
+                                        <tr>
+                                            <td valign=3D"top" class=3D"bo=
+dyContainer" style=3D"background:transparent none no-repeat center/cover;m=
+so-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-=
+adjust: 100%;background-color: transparent;background-image: none;backgrou=
+nd-repeat: no-repeat;background-position: center;background-size: cover;bo=
+rder-top: 0;border-bottom: 0;padding-top: 0;padding-bottom: 0;"><table bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"mcnT=
+extBlock" style=3D"min-width: 100%;border-collapse: collapse;mso-table-lsp=
+ace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;">
+    <tbody class=3D"mcnTextBlockOuter">
+        <tr>
+            <td valign=3D"top" class=3D"mcnTextBlockInner" style=3D"paddin=
+g-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webki=
+t-text-size-adjust: 100%;">
+              =09<!--[if mso]>
+=09=09=09=09<table align=3D"left" border=3D"0" cellspacing=3D"0" cellpaddi=
+ng=3D"0" width=3D"100%" style=3D"width:100%;">
+=09=09=09=09<tr>
+=09=09=09=09<![endif]-->
+=09=09=09
+=09=09=09=09<!--[if mso]>
+=09=09=09=09<td valign=3D"top" width=3D"600" style=3D"width:600px;">
+=09=09=09=09<![endif]-->
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" style=3D"max-width: 100%;min-width: 100%;border-collapse: col=
+lapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;" width=3D"100%" class=3D"mcnTextContent=
+Container">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"mcnTextContent" style=
+=3D"padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 1=
+8px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;word-break: break-word;color: #757575;font-family: Helve=
+tica;font-size: 16px;line-height: 150%;text-align: left;">
+
+                            Hello Data=2C<br>
+in the following the latest Ansible Pilot videos.
+<p style=3D"margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-te=
+xt-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #757575;font-fa=
+mily: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">ANSIB=
+LE KEY DATES - from&nbsp;<a href=3D"https://ansiblepilot.us5.list-manage.c=
+om/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D9465d9ea3c&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-height-rule: exactly;-ms-text-size=
+-adjust: 100%;-webkit-text-size-adjust: 100%;color: #007C89;font-weight: n=
+ormal;text-decoration: underline;">Ansible Official Newsletter</a></p>
+
+<ul>
+=09<li data-endline=3D"13" data-position=3D"744" data-size=3D"0" data-star=
+tline=3D"13" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;"><strong data-position=3D"744" data-=
+size=3D"0">2022-10-17:&nbsp;<a href=3D"https://ansiblepilot.us5.list-manag=
+e.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D4d1c544527&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" style=3D"mso-line-height-rule: e=
+xactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #0=
+07C89;font-weight: normal;text-decoration: underline;">Ansible Contributor=
+ Summit 2022.10</a></strong></li>
+=09<li data-endline=3D"14" data-position=3D"861" data-size=3D"0" data-star=
+tline=3D"14" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-17:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D7602286f9f&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Ansible-core 2.14 release candidate 1</a></li>
+=09<li data-endline=3D"15" data-position=3D"988" data-size=3D"0" data-star=
+tline=3D"15" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;"><strong data-position=3D"988" data-=
+size=3D"0">2022-10-18/19:&nbsp;<a href=3D"https://ansiblepilot.us5.list-ma=
+nage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D3c0557afdb&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" style=3D"mso-line-height-rule=
+: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color:=
+ #007C89;font-weight: normal;text-decoration: underline;">AnsibleFest 2022=
+</a></strong></li>
+=09<li data-endline=3D"16" data-position=3D"1093" data-size=3D"0" data-sta=
+rtline=3D"16" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-18:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3Da02a80e396&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">DaWGs meeting</a>=2C 15:00 UTC</li>
+=09<li data-endline=3D"17" data-position=3D"1185" data-size=3D"0" data-sta=
+rtline=3D"17" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-19:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D8223a7ff4c&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Community WG meeting</a>=2C 18:00 UTC (propose topics&nbsp;<a hre=
+f=3D"https://ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866a=
+d250b525ddce3&id=3D23edc9aa22&e=3Db1c921b79b" rel=3D"noopener" target=3D"=
+_blank" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;=
+-webkit-text-size-adjust: 100%;color: #007C89;font-weight: normal;text-dec=
+oration: underline;">here</a>)</li>
+=09<li data-endline=3D"18" data-position=3D"1370" data-size=3D"0" data-sta=
+rtline=3D"18" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-25:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D008d73fd6f&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">ETA for Ansible 6.6.0 release</a></li>
+=09<li data-endline=3D"19" data-position=3D"1485" data-size=3D"0" data-sta=
+rtline=3D"19" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-26:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3Ddeda34cde1&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Community WG meeting</a>=2C 18:00 UTC (<a href=3D"https://ansible=
+pilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D5=
+60aade5ce&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" style=3D"mso=
+-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-ad=
+just: 100%;color: #007C89;font-weight: normal;text-decoration: underline;"=
+>topic: Decide what contingencies to activate for any blockers that do not=
+ meet the deadline</a>)</li>
+=09<li data-endline=3D"20" data-position=3D"1747" data-size=3D"0" data-sta=
+rtline=3D"20" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-10-27:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D1940545620&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Bullhorn #79 content deadline</a>=2C 18:00 UTC</li>
+=09<li data-endline=3D"21" data-position=3D"1867" data-size=3D"0" data-sta=
+rtline=3D"21" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-11-07: ETA for Ansible-Core 2.=
+13.6 and Ansible-Core 2.12.11 releases (if those releases have updates)</l=
+i>
+=09<li data-endline=3D"22" data-position=3D"1978" data-size=3D"0" data-sta=
+rtline=3D"22" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-11-07:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D24f09e1870&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Ansible-core 2.14 GA</a></li>
+=09<li data-endline=3D"23" data-position=3D"2088" data-size=3D"0" data-sta=
+rtline=3D"23" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;">2022-11-07:&nbsp;<a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3Db8790e7516&e=3Db1c921b79b" rel=3D"noopener" target=3D"_blank" styl=
+e=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: und=
+erline;">Last day for collections to make backwards incompatible releases=
+ that will be accepted into Ansible-7</a></li>
+</ul>
+Luca<br>
+PS: subscribe to the <a href=3D"https://ansiblepilot.us5.list-manage.com/t=
+rack/click?u=3Dc16b663d866ad250b525ddce3&id=3Decf5be2c33&e=3Db1c921b79b"=
+ target=3D"_blank" title=3D"Ansiblel Pilot YouTube channel" style=3D"mso-l=
+ine-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adju=
+st: 100%;color: #007C89;font-weight: normal;text-decoration: underline;">Y=
+ouTube channel</a> to be up-to-date!
+                        </td>
+                    </tr>
+                </tbody></table>
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</td>
+=09=09=09=09<![endif]-->
+
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</tr>
+=09=09=09=09</table>
+=09=09=09=09<![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnImageCardBlock" style=3D"border-collapse: collapse;mso-ta=
+ble-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-t=
+ext-size-adjust: 100%;">
+    <tbody class=3D"mcnImageCardBlockOuter">
+        <tr>
+            <td class=3D"mcnImageCardBlockInner" valign=3D"top" style=3D"p=
+adding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;">
+
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cla=
+ss=3D"mcnImageCardBottomContent" width=3D"100%" style=3D"background-color:=
+ #404040;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace:=
+ 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td class=3D"mcnImageCardBottomImageContent" align=3D"left" valign=
+=3D"top" style=3D"padding-top: 0px;padding-right: 0px;padding-bottom: 0;pa=
+dding-left: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-=
+webkit-text-size-adjust: 100%;">
+
+
+            <a href=3D"https://ansiblepilot.us5.list-manage.com/track/clic=
+k?u=3Dc16b663d866ad250b525ddce3&id=3D078eee17ca&e=3Db1c921b79b" title=3D"=
+Install Ansible AWX Operator for Kubernetes (K8s) and OpenShift (OCP) - An=
+sible AWX" class=3D"" target=3D"_blank" style=3D"mso-line-height-rule: exa=
+ctly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+
+            <img alt=3D"" src=3D"https://mcusercontent.com/c16b663d866ad25=
+0b525ddce3/video_thumbnails_new/485099a009768744b3ba99016fbe5292.png" widt=
+h=3D"564" style=3D"max-width: 640px;border: 0;height: auto;outline: none;t=
+ext-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: botto=
+m;" class=3D"mcnImage">
+            </a>
+
+        </td>
+    </tr>
+    <tr>
+        <td class=3D"mcnTextContent" valign=3D"top" style=3D"padding: 9px=
+ 18px;color: #F2F2F2;font-family: Helvetica;font-size: 14px;font-weight: n=
+ormal;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjus=
+t: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height:=
+ 150%;" width=3D"546">
+            Install Ansible AWX Operator for Kubernetes (K8s) and OpenShif=
+t (OCP) - Ansible AWX
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnImageCardBlock" style=3D"border-collapse: collapse;mso-ta=
+ble-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-t=
+ext-size-adjust: 100%;">
+    <tbody class=3D"mcnImageCardBlockOuter">
+        <tr>
+            <td class=3D"mcnImageCardBlockInner" valign=3D"top" style=3D"p=
+adding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;">
+
+<table align=3D"right" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"mcnImageCardBottomContent" width=3D"100%" style=3D"background-color=
+: #404040;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace=
+: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td class=3D"mcnImageCardBottomImageContent" align=3D"left" valign=
+=3D"top" style=3D"padding-top: 0px;padding-right: 0px;padding-bottom: 0;pa=
+dding-left: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-=
+webkit-text-size-adjust: 100%;">
+
+
+            <a href=3D"https://ansiblepilot.us5.list-manage.com/track/clic=
+k?u=3Dc16b663d866ad250b525ddce3&id=3Dc0926b949b&e=3Db1c921b79b" title=3D"=
+Run and Stop Ansible AWX in Docker containers - Ansible AWX" class=3D"" ta=
+rget=3D"_blank" style=3D"mso-line-height-rule: exactly;-ms-text-size-adjus=
+t: 100%;-webkit-text-size-adjust: 100%;">
+
+
+            <img alt=3D"" src=3D"https://mcusercontent.com/c16b663d866ad25=
+0b525ddce3/video_thumbnails_new/dc989d6bfd80a78bb2de6d30e92a58ae.png" widt=
+h=3D"564" style=3D"max-width: 640px;border: 0;height: auto;outline: none;t=
+ext-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: botto=
+m;" class=3D"mcnImage">
+            </a>
+
+        </td>
+    </tr>
+    <tr>
+        <td class=3D"mcnTextContent" valign=3D"top" style=3D"padding: 9px=
+ 18px;color: #F2F2F2;font-family: Helvetica;font-size: 14px;font-weight: n=
+ormal;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjus=
+t: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height:=
+ 150%;" width=3D"546">
+            <div style=3D"text-align: left;">Run and Stop Ansible AWX in D=
+ocker containers - Ansible AWX</div>
+
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnButtonBlock" style=3D"min-width: 100%;border-collapse: co=
+llapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 1=
+00%;-webkit-text-size-adjust: 100%;">
+    <tbody class=3D"mcnButtonBlockOuter">
+        <tr>
+            <td style=3D"padding-top: 0;padding-right: 18px;padding-bottom=
+: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adju=
+st: 100%;-webkit-text-size-adjust: 100%;" valign=3D"top" align=3D"center"=
+ class=3D"mcnButtonBlockInner">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"mcnButtonContentContainer" style=3D"border-collapse: separate !impo=
+rtant;border-radius: 4px;background-color: #2BAADF;mso-table-lspace: 0pt;m=
+so-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust:=
+ 100%;">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" class=
+=3D"mcnButtonContent" style=3D"font-family: Arial;font-size: 16px;padding:=
+ 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-tex=
+t-size-adjust: 100%;">
+                                <a class=3D"mcnButton " title=3D"Download=
+ Top 10 Ansible Best Practices" href=3D"https://ansiblepilot.us5.list-mana=
+ge.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3Dcd9a313b6a&e=3Db1c921b79b" target=3D"_blank" style=3D"font-weight: bold;letter-spacing: norma=
+l;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFF=
+F;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-si=
+ze-adjust: 100%;display: block;">Download Top 10 Ansible Best Practices</a=
+>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnButtonBlock" style=3D"min-width: 100%;border-collapse: co=
+llapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 1=
+00%;-webkit-text-size-adjust: 100%;">
+    <tbody class=3D"mcnButtonBlockOuter">
+        <tr>
+            <td style=3D"padding-top: 0;padding-right: 18px;padding-bottom=
+: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adju=
+st: 100%;-webkit-text-size-adjust: 100%;" valign=3D"top" align=3D"center"=
+ class=3D"mcnButtonBlockInner">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"mcnButtonContentContainer" style=3D"border-collapse: separate !impo=
+rtant;border-radius: 4px;background-color: #E0629A;mso-table-lspace: 0pt;m=
+so-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust:=
+ 100%;">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" class=
+=3D"mcnButtonContent" style=3D"font-family: Arial;font-size: 16px;padding:=
+ 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-tex=
+t-size-adjust: 100%;">
+                                <a class=3D"mcnButton " title=3D"Learn Ans=
+ible in 200+ lessons in Udemy" href=3D"https://ansiblepilot.us5.list-manag=
+e.com/track/click?u=3Dc16b663d866ad250b525ddce3&id=3D20aba5af54&e=3Db1c921b79b" target=3D"_blank" style=3D"font-weight: bold;letter-spacing: normal=
+;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;display: block;">Learn Ansible in 200+ lessons in Udemy</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align=3D"center" valign=3D"top" id=3D"=
+templateFooter" data-template-container=3D"" style=3D"background:#333333 n=
+one no-repeat center/cover;mso-line-height-rule: exactly;-ms-text-size-adj=
+ust: 100%;-webkit-text-size-adjust: 100%;background-color: #333333;backgro=
+und-image: none;background-repeat: no-repeat;background-position: center;b=
+ackground-size: cover;border-top: 0;border-bottom: 0;padding-top: 45px;pad=
+ding-bottom: 63px;">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align=3D"center" border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0" width=3D"600" style=3D"width:600px;">
+                                    <tr>
+                                    <td align=3D"center" valign=3D"top" wi=
+dth=3D"600" style=3D"width:600px;">
+                                    <![endif]-->
+                                    <table align=3D"center" border=3D"0" c=
+ellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"templateContain=
+er" style=3D"border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rsp=
+ace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;max-wid=
+th: 600px !important;">
+                                        <tr>
+                                            <td valign=3D"top" class=3D"fo=
+oterContainer" style=3D"background:transparent none no-repeat center/cover=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;background-color: transparent;background-image: none;backgr=
+ound-repeat: no-repeat;background-position: center;background-size: cover;=
+border-top: 0;border-bottom: 0;padding-top: 0;padding-bottom: 0;"><table b=
+order=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"mc=
+nFollowBlock" style=3D"min-width: 100%;border-collapse: collapse;mso-table=
+-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text=
+-size-adjust: 100%;">
+    <tbody class=3D"mcnFollowBlockOuter">
+        <tr>
+            <td align=3D"center" valign=3D"top" style=3D"padding: 9px;mso-=
+line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adj=
+ust: 100%;" class=3D"mcnFollowBlockInner">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wi=
+dth=3D"100%" class=3D"mcnFollowContentContainer" style=3D"min-width: 100%;=
+border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-=
+text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td align=3D"center" style=3D"padding-left: 9px;padding-right: 9px=
+;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width: 100%;border-collapse: collapse;mso-table-lsp=
+ace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-siz=
+e-adjust: 100%;" class=3D"mcnFollowContent">
+                <tbody><tr>
+                    <td align=3D"center" valign=3D"top" style=3D"padding-t=
+op: 9px;padding-right: 9px;padding-left: 9px;mso-line-height-rule: exactly=
+;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                        <table align=3D"center" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"border-collapse: collapse;mso-table-lspa=
+ce: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size=
+-adjust: 100%;">
+                            <tbody><tr>
+                                <td align=3D"center" valign=3D"top" style=
+=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;">
+                                    <!--[if mso]>
+                                    <table align=3D"center" border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0">
+                                    <tr>
+                                    <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3Dc89d794059&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-link-96.png" alt=3D"Website" class=3D"mcnFollowBlockIcon" width=
+=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;heig=
+ht: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicub=
+ic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D9db3205230&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-facebook-96.png" alt=3D"Facebook" class=3D"mcnFollowBlockIcon"=
+ width=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border:=
+ 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode=
+: bicubic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3Dd1ae27f6da&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-twitter-96.png" alt=3D"Twitter" class=3D"mcnFollowBlockIcon" wi=
+dth=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;h=
+eight: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bi=
+cubic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D24d64af8f1&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-instagram-96.png" alt=3D"Link" class=3D"mcnFollowBlockIcon" wid=
+th=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;he=
+ight: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bic=
+ubic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D30f65322ce&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-medium-96.png" alt=3D"Medium" class=3D"mcnFollowBlockIcon" widt=
+h=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;hei=
+ght: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicu=
+bic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 10px;=
+padding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D111027b10c&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-reddit-96.png" alt=3D"Reddit" class=3D"mcnFollowBlockIcon" widt=
+h=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;hei=
+ght: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicu=
+bic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                        <!--[if mso]>
+                                        <td align=3D"center" valign=3D"top=
+">
+                                        <![endif]-->
+
+                                            <table align=3D"left" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"mcnFollowStacked" styl=
+e=3D"display: inline;border-collapse: collapse;mso-table-lspace: 0pt;mso-t=
+able-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%=
+;">
+
+                                                <tbody><tr>
+                                                    <td align=3D"center" v=
+align=3D"top" class=3D"mcnFollowIconContent" style=3D"padding-right: 0;pad=
+ding-bottom: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;=
+-webkit-text-size-adjust: 100%;">
+                                                        <a href=3D"https:/=
+/ansiblepilot.us5.list-manage.com/track/click?u=3Dc16b663d866ad250b525ddce=
+3&id=3D45ee9897eb&e=3Db1c921b79b" target=3D"_blank" style=3D"mso-line-hei=
+ght-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block-v2/out=
+line-light-youtube-96.png" alt=3D"YouTube" class=3D"mcnFollowBlockIcon" wi=
+dth=3D"48" style=3D"width: 48px;max-width: 48px;display: block;border: 0;h=
+eight: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bi=
+cubic;"></a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody></table>
+
+
+                                        <!--[if mso]>
+                                        </td>
+                                        <![endif]-->
+
+                                    <!--[if mso]>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnDividerBlock" style=3D"min-width: 100%;border-collapse: c=
+ollapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust:=
+ 100%;-webkit-text-size-adjust: 100%;table-layout: fixed !important;">
+    <tbody class=3D"mcnDividerBlockOuter">
+        <tr>
+            <td class=3D"mcnDividerBlockInner" style=3D"min-width: 100%;pa=
+dding: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webk=
+it-text-size-adjust: 100%;">
+                <table class=3D"mcnDividerContent" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"min-width: 100%;border-t=
+op: 2px solid #505050;border-collapse: collapse;mso-table-lspace: 0pt;mso-=
+table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100=
+%;">
+                    <tbody><tr>
+                        <td style=3D"mso-line-height-rule: exactly;-ms-tex=
+t-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--
+                <td class=3D"mcnDividerBlockInner" style=3D"padding: 18px;=
+">
+                <hr class=3D"mcnDividerContent" style=3D"border-bottom-col=
+or:none; border-left-color:none; border-right-color:none; border-bottom-wi=
+dth:0; border-left-width:0; border-right-width:0; margin-top:0; margin-rig=
+ht:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" class=3D"mcnTextBlock" style=3D"min-width: 100%;border-collapse: coll=
+apse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100=
+%;-webkit-text-size-adjust: 100%;">
+    <tbody class=3D"mcnTextBlockOuter">
+        <tr>
+            <td valign=3D"top" class=3D"mcnTextBlockInner" style=3D"paddin=
+g-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webki=
+t-text-size-adjust: 100%;">
+              =09<!--[if mso]>
+=09=09=09=09<table align=3D"left" border=3D"0" cellspacing=3D"0" cellpaddi=
+ng=3D"0" width=3D"100%" style=3D"width:100%;">
+=09=09=09=09<tr>
+=09=09=09=09<![endif]-->
+=09=09=09
+=09=09=09=09<!--[if mso]>
+=09=09=09=09<td valign=3D"top" width=3D"600" style=3D"width:600px;">
+=09=09=09=09<![endif]-->
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" style=3D"max-width: 100%;min-width: 100%;border-collapse: col=
+lapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 10=
+0%;-webkit-text-size-adjust: 100%;" width=3D"100%" class=3D"mcnTextContent=
+Container">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"mcnTextContent" style=
+=3D"padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 1=
+8px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;word-break: break-word;color: #FFFFFF;font-family: Helve=
+tica;font-size: 12px;line-height: 150%;text-align: center;">
+
+                            <em>Copyright =C2=A9 2022 Ansible Pilot=2C All=
+ rights reserved.</em><br>
+ You are receiving this email because you opted in via our website.<br>
+<br>
+<strong>Contact me:</strong><br>
+https://www.ansiblepilot.com/&nbsp;
+<br>
+<br>
+Want to change how you receive these emails?<br>
+You can <a href=3D"https://ansiblepilot.us5.list-manage.com/profile?u=3Dc1=
+6b663d866ad250b525ddce3&id=3D307ee3b1a0&e=3Db1c921b79b&c=3D218a2bd4ae" style=
+=3D"mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-=
+size-adjust: 100%;color: #FFFFFF;font-weight: normal;text-decoration: unde=
+rline;">update your preferences</a> or <a href=3D"https://ansiblepilot.us5=
+=2Elist-manage.com/unsubscribe?u=3Dc16b663d866ad250b525ddce3&id=3D307ee3b1a0=
+&e=3Db1c921b79b&c=3D218a2bd4ae" style=3D"mso-line-height-rule: exactly;-ms-t=
+ext-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFFFFF;font-w=
+eight: normal;text-decoration: underline;">unsubscribe from this list</a>.=
+<br>
+<br>
+ <a href=3D"http://www.mailchimp.com/email-referral/?utm_source=3Dfreemium=
+_newsletter&utm_medium=3Demail&utm_campaign=3Dreferral_marketing&aid=3Dc16=
+b663d866ad250b525ddce3&afl=3D1"><img src=3D"https://cdn-images.mailchimp.c=
+om/monkey_rewards/grow-business-banner-2.png" border=3D"0" alt=3D"Email Ma=
+rketing Powered by Mailchimp" title=3D"Mailchimp Email Marketing" width=3D=
+"435" height=3D"64" style=3D"max-width: 100%; height: auto;"></a>
+                        </td>
+                    </tr>
+                </tbody></table>
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</td>
+=09=09=09=09<![endif]-->
+
+=09=09=09=09<!--[if mso]>
+=09=09=09=09</tr>
+=09=09=09=09</table>
+=09=09=09=09<![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </table>
+        </center>
+    <img src=3D"https://ansiblepilot.us5.list-manage.com/track/open.php?u=
+=3Dc16b663d866ad250b525ddce3&id=3D218a2bd4ae&e=3Db1c921b79b" height=3D"1"=
+ width=3D"1" alt=3D""></body>
+</html>
+--_----------=_MCPart_1926402736--
